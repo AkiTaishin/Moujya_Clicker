@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\PlayerParts\AttackCollider.cs" />
     <Compile Include="Assets\Scripts\PlayerParts\AttackRay.cs" />
     <Compile Include="Assets\Scripts\PlayerParts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\UI_WaveText\WaveCountdown.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

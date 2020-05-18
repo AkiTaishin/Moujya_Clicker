@@ -2,11 +2,16 @@
 
 public class PlayerController : MonoBehaviour
 {
+    #region 変数宣言
+
     [SerializeField] private AttackCollider attackCollider = null;
+
     private GameObject chase = null;
     public Vector3 PlayerDir;
 
     private float PlayerRot = 0.0f;
+
+    #endregion
 
     private void Start()
     {

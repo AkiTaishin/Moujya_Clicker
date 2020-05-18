@@ -5,6 +5,8 @@ public class AttackCollider : MonoBehaviour
 {
     #region 変数宣言
 
+    [SerializeField] private WaveCountdown wave = null;
+
     // false = 弱
     private bool AttackPattern = false;
 
@@ -103,13 +105,14 @@ public class AttackCollider : MonoBehaviour
         //ターゲットにしたオブジェクトにタグをつけとく
         if (other.gameObject.tag == "enemy")
         {
-            //Debug.Log("hit");
-
             // @todoここでダメージ判定処理
 
             // コルーチン停止
             // 物体どっちにしろ消えるしこれいらないのでは？
             // chase.GetComponent<Chase>().SetbC_();
+
+            // 次のWaveまでの残り敵数管理
+            wave.TextCountdown();
 
             // 当たったエネミーの削除
             Destroy(other.gameObject);

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AttackRay : MonoBehaviour
 {
+    [SerializeField] private WaveCountdown wave = null;
+
     private Vector3 GetPlayerDir = Vector3.zero;
 
     // 攻撃による当たり判定
@@ -37,6 +39,9 @@ public class AttackRay : MonoBehaviour
             {
                 Debug.Log("RayHit");
                 Debug.Log(hit.collider.gameObject.transform.position);
+
+                // 次のWaveまでの残り敵数管理
+                wave.TextCountdown();
 
                 // 当たったエネミーの削除
                 Destroy(hit.transform.gameObject);
