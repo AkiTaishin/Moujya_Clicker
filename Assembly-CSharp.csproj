@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\EnemyParts\Chase.cs" />
     <Compile Include="Assets\Scripts\EnemyParts\EnemyGenerater.cs" />
     <Compile Include="Assets\Scripts\PlayerParts\AttackCollider.cs" />
+    <Compile Include="Assets\Scripts\PlayerParts\AttackRay.cs" />
     <Compile Include="Assets\Scripts\PlayerParts\PlayerController.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

@@ -169,6 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCollider: {fileID: 1082629900}
+  PlayerDir: {x: 0, y: 0, z: 0}
 --- !u!65 &295646077
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -606,6 +607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bAttackFrameIsBusy: 0
+  attackRay: {fileID: 1145275370}
 --- !u!54 &1082629901
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -727,6 +729,7 @@ GameObject:
   - component: {fileID: 1145275369}
   - component: {fileID: 1145275368}
   - component: {fileID: 1145275367}
+  - component: {fileID: 1145275370}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -809,6 +812,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1145275365}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1145275370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145275365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e09df5db4cb19c46ae57c84d8845c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RayLengs: 2.5
 --- !u!1 &1606594074
 GameObject:
   m_ObjectHideFlags: 0

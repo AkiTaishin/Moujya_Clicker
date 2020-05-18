@@ -3,9 +3,19 @@ using UnityEngine;
 
 public class AttackCollider : MonoBehaviour
 {
+    #region 変数宣言
+
+    // false = 弱
+    private bool AttackPattern = false;
+
     // コルーチン二重稼働防止用
     // 攻撃発生まで動けない時のためにpublicにしておく@todo仕様確認
     public bool bAttackFrameIsBusy = false;
+
+    public AttackRay attackRay = null;
+
+    #endregion
+
 
     // Update is called once per frame
     private void Update()
@@ -19,12 +29,14 @@ public class AttackCollider : MonoBehaviour
             // 弱
             if (Input.GetKey(KeyCode.C))
             {
-                StartCoroutine(C_AttackFrame(0.5f));
+                AttackPattern = false;
+                StartCoroutine(C_AttackFrame(0.3f));
             }
             // 強
             if (Input.GetKey(KeyCode.V))
             {
-                StartCoroutine(C_AttackFrame(2.0f));
+                AttackPattern = true;
+                StartCoroutine(C_AttackFrame(0.9f));
             }
         }
 
@@ -52,22 +64,30 @@ public class AttackCollider : MonoBehaviour
     private IEnumerator C_FinishAttackFrame()
     {
         // 判定の可視化をなくす
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.1f);
         PlayerAttackFinish();
     }
 
     // 攻撃処理
     private void PlayerAttack()
     {
-        this.GetComponent<BoxCollider>().enabled = true;
-        this.GetComponent<MeshRenderer>().enabled = true;
+        attackRay.AttackHitProcess();
+
+        if(AttackPattern)
+        {
+            this.GetComponent<BoxCollider>().enabled = true;
+            this.GetComponent<MeshRenderer>().enabled = true;
+        }
     }
 
     // 攻撃終了処理(当たり判定の削除)
     private void PlayerAttackFinish()
     {
-        this.GetComponent<BoxCollider>().enabled = false;
-        this.GetComponent<MeshRenderer>().enabled = false;
+        if (AttackPattern)
+        {
+            this.GetComponent<BoxCollider>().enabled = false;
+            this.GetComponent<MeshRenderer>().enabled = false;
+        }
 
         // フラグの初期化
         bAttackFrameIsBusy = false;
@@ -83,7 +103,7 @@ public class AttackCollider : MonoBehaviour
         //ターゲットにしたオブジェクトにタグをつけとく
         if (other.gameObject.tag == "enemy")
         {
-            Debug.Log("hit");
+            //Debug.Log("hit");
 
             // @todoここでダメージ判定処理
 
@@ -93,7 +113,7 @@ public class AttackCollider : MonoBehaviour
 
             // 当たったエネミーの削除
             Destroy(other.gameObject);
-            Debug.Log("攻撃によって死亡");
+            //Debug.Log("攻撃によって死亡");
         }
     }
 }

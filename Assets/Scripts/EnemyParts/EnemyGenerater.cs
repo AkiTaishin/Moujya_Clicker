@@ -16,7 +16,8 @@ public class EnemyGenerater : MonoBehaviour
     void Start()
     {
         // @todo可変値
-        interval = 5.0f;
+        interval = 3.0f;
+        //interval = 1.5f;
     }
 
     // Update is called once per frame
@@ -80,6 +81,6 @@ public class EnemyGenerater : MonoBehaviour
     void ChangeInterval()
     {
         interval = Random.Range(0.5f, 5.0f);
-        Debug.Log(interval);
+        //Debug.Log(interval);
     }
 }
