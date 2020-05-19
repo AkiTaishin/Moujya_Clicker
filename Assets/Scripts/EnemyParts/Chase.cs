@@ -5,6 +5,8 @@ public class Chase : MonoBehaviour
 {
     #region 変数宣言
 
+    [SerializeField] public EnemyStatusManager status = null;
+
     // UnityでプレイヤーにPlayerタグを設定する
     // プレイヤーを突っ込む
     private GameObject playerController = null;
@@ -14,10 +16,6 @@ public class Chase : MonoBehaviour
 
     // コルーチン二重防止用
     public bool bC_ChasePlayerIsBusy = false;
-
-    // enemyの速度を管理したい
-    // @todo敵によって速度が違う場合
-    public float EnemySpeed = 1.0f;
 
     #endregion 変数宣言
 
@@ -48,12 +46,11 @@ public class Chase : MonoBehaviour
         // 防止
         bC_ChasePlayerIsBusy = true;
 
-        // 加速度調整
-        float speed = EnemySpeed * Time.deltaTime;
-
         // 重なっていない時はどんどん追尾
         while (this.gameObject.transform.position != LocatePlayer)
         {
+            // 加速度調整
+            float speed = status.GetSpeed() * Time.deltaTime;
             yield return new WaitForEndOfFrame();
 
             // ここで追尾処理

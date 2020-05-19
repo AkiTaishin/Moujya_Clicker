@@ -64,7 +64,9 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\EnemyParts\Chase.cs" />
     <Compile Include="Assets\Scripts\EnemyParts\EnemyGenerater.cs" />
+    <Compile Include="Assets\Scripts\EnemyParts\EnemyStatusManager.cs" />
     <Compile Include="Assets\Scripts\PlayerParts\AttackCollider.cs" />
+    <Compile Include="Assets\Scripts\PlayerParts\AttackProcess.cs" />
     <Compile Include="Assets\Scripts\PlayerParts\AttackRay.cs" />
     <Compile Include="Assets\Scripts\PlayerParts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\UI_WaveText\WaveCountdown.cs" />

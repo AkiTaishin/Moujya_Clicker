@@ -1,18 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AttackRay : MonoBehaviour
 {
     [SerializeField] private WaveCountdown wave = null;
 
+    // 攻撃方向
     private Vector3 GetPlayerDir = Vector3.zero;
+
+    // 攻撃力基礎値
+    private int AttackPower = 1;
 
     // 攻撃による当たり判定
     // Collisionを使わずに貫通判定を無くすようにする
     private Ray ray;
-    public float RayLengs = 2.5f;
 
+    public float RayLengs = 2.5f;
 
     /// <summary>
     /// Raycastを使った当たり判定
@@ -40,12 +42,17 @@ public class AttackRay : MonoBehaviour
                 Debug.Log("RayHit");
                 Debug.Log(hit.collider.gameObject.transform.position);
 
-                // 次のWaveまでの残り敵数管理
-                wave.TextCountdown();
+                // 敵の体力の減少処理
+                hit.transform.gameObject.GetComponent<EnemyStatusManager>().SetHP(AttackPower);
 
-                // 当たったエネミーの削除
-                Destroy(hit.transform.gameObject);
-                //Debug.Log("Ray_攻撃によって死亡");
+                // 攻撃によってこの敵が破壊されたか？
+                if (hit.transform.gameObject.GetComponent<EnemyStatusManager>().GetHP() <= 0)
+                {
+                    // 当たったエネミーの削除
+                    Destroy(hit.transform.gameObject);
+                    // 次のWaveまでの残り敵数管理
+                    wave.TextCountdown();
+                }
             }
         }
     }

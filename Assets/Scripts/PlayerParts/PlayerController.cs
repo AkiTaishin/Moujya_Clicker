@@ -4,7 +4,7 @@ public class PlayerController : MonoBehaviour
 {
     #region 変数宣言
 
-    [SerializeField] private AttackCollider attackCollider = null;
+    [SerializeField] private AttackProcess attackProcess = null;
 
     private GameObject chase = null;
     public Vector3 PlayerDir;
@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // 攻撃しているときは動けません
-        if (!attackCollider.bAttackFrameIsBusy)
+        if (!attackProcess.bAttackFrameIsBusy)
         {
             #region プレイヤーの向き操作(WASD)
 
@@ -60,14 +60,12 @@ public class PlayerController : MonoBehaviour
     /// プレイヤーとの衝突判定
     /// タグで何とぶつかったのか判定する
     /// </summary>
-    /// <param name="other">衝突した物体のタグが入る</param>
+    /// <param name="other">衝突した物体が入る</param>
     void OnTriggerEnter(Collider other)
     {
         //ターゲットにしたオブジェクトにタグをつけとく
         if (other.gameObject.tag == "enemy")
         {
-            Debug.Log("当たったよ");
-
             // @todoここでダメージ判定処理
 
             // コルーチン停止
@@ -76,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
             // 当たったエネミーの削除
             Destroy(other.gameObject);
-            Debug.Log("プレイヤーにダメージを与えた");
+            //Debug.Log("プレイヤーにダメージを与えた");
         }
     }
 }

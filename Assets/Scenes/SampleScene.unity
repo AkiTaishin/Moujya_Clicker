@@ -267,8 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec284f3f298acf74eb47ce76d69fa2ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCollider: {fileID: 1082629900}
-  wave: {fileID: 781706903}
+  attackProcess: {fileID: 1145275371}
   PlayerDir: {x: 0, y: 0, z: 0}
 --- !u!65 &295646077
 BoxCollider:
@@ -458,7 +457,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -236.62, y: 380.9}
+  m_AnchoredPosition: {x: -213.19, y: 380.9}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &781706901
@@ -484,7 +483,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 24
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 4
@@ -796,12 +795,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1082629895}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edd6f9c52f9aa7f479df0b8dcea917da, type: 3}
+  m_Script: {fileID: 11500000, guid: b5ac3463b494c4b41b121e9739d0c720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wave: {fileID: 0}
-  bAttackFrameIsBusy: 0
-  attackRay: {fileID: 1145275370}
+  wave: {fileID: 781706903}
+  AttackPower: 2
 --- !u!54 &1082629901
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -924,6 +922,7 @@ GameObject:
   - component: {fileID: 1145275368}
   - component: {fileID: 1145275367}
   - component: {fileID: 1145275370}
+  - component: {fileID: 1145275371}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -1019,7 +1018,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wave: {fileID: 781706903}
+  AttackPower: 1
   RayLengs: 2.5
+--- !u!114 &1145275371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145275365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edd6f9c52f9aa7f479df0b8dcea917da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRay: {fileID: 1145275370}
+  attackCollider: {fileID: 1082629900}
+  bAttackFrameIsBusy: 0
 --- !u!1 &1245003742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,7 +1130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6973e2f57e5fa44bab247c4536339e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 2896604416777973027, guid: 0b282033dd286344ca07ceb4121b07c8,
+  enemyPrefab: {fileID: 4687198534614181040, guid: fc5426849a423ec41ba4b2a4a486ac79,
     type: 3}
 --- !u!4 &1606594076
 Transform:
