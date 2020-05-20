@@ -12,7 +12,7 @@ public class EnemyGenerater : MonoBehaviour
     // 0 = NORMAL, // 攻撃１体力１速さ１
     // 1 = SPEED, // 攻撃１体力１速さ２
     // 2 = POWER, // 攻撃３体力４速さ１
-    private int type = 0;
+    public int type = 0;
 
     //敵生成時間間隔
     private float interval;
@@ -39,49 +39,6 @@ public class EnemyGenerater : MonoBehaviour
         // 経過時間が生成時間になったとき(生成時間より大きくなったとき)
         if (time > interval)
         {
-            //// enemyをインスタンス化する(生成する)
-            //GameObject enemy = Instantiate(enemyPrefab);
-            //enemy.SetActive(true);
-
-            //float random = 0.0f;
-            //random = Random.Range(0, 99);
-
-            //#region 生成の条件分岐
-
-            //if (0 <= random && random < 25)
-            //{
-            //    // 生成した敵の座標を決定する(現状X=0,Y=10,Z=20の位置に出力)
-            //    enemy.transform.position = new Vector3(0.0f, 7.5f, 4.5f);
-
-            //    ChangeInterval();
-            //}
-
-            //if (25 <= random && random < 50)
-            //{
-            //    // 生成した敵の座標を決定する(現状X=0,Y=10,Z=20の位置に出力)
-            //    enemy.transform.position = new Vector3(0.0f, 7.5f, -4.5f);
-
-            //    ChangeInterval();
-            //}
-
-            //if (50 <= random && random < 75)
-            //{
-            //    // 生成した敵の座標を決定する(現状X=0,Y=10,Z=20の位置に出力)
-            //    enemy.transform.position = new Vector3(4.5f, 7.5f, 0.0f);
-
-            //    ChangeInterval();
-            //}
-
-            //if (75 <= random && random < 100)
-            //{
-            //    // 生成した敵の座標を決定する(現状X=0,Y=10,Z=20の位置に出力)
-            //    enemy.transform.position = new Vector3(-4.5f, 7.5f, 0.0f);
-
-            //    ChangeInterval();
-            //}
-
-            //#endregion 生成の条件分岐
-
             Generater();
 
             // 経過時間を初期化して再度時間計測を始める
@@ -104,27 +61,28 @@ public class EnemyGenerater : MonoBehaviour
         #region 雑魚のタイプ決定
 
         type = Random.Range(0, 3);
+        var workType = enemy.GetComponent<EnemyStatusManager>().Type = type;
 
         // Normal
-        if (type == 0)
+        if (workType == 0)
         {
             enemy.GetComponent<EnemyStatusManager>().SetStatus(1, 1, 1.0f);
             enemy.GetComponent<Renderer>().material.color = Color.green;
         }
         // Speed
-        if (type == 1)
+        if (workType == 1)
         {
             enemy.GetComponent<EnemyStatusManager>().SetStatus(1, 1, 2.0f);
             enemy.GetComponent<Renderer>().material.color = Color.blue;
         }
         // Power
-        if (type == 2)
+        if (workType == 2)
         {
             enemy.GetComponent<EnemyStatusManager>().SetStatus(4, 3, 1.0f);
             enemy.GetComponent<Renderer>().material.color = Color.red;
         }
         // ErrorCheck
-        if (type >= 3) { return; }
+        if (workType >= 3) { return; }
 
         #endregion 雑魚のタイプ決定
 

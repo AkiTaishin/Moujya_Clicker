@@ -3,6 +3,7 @@
 // 雑魚敵のステータスのみを管理したい
 public class EnemyStatusManager : MonoBehaviour
 {
+    public int Type;
     public int HP;
     private int Power;
     private float Speed;
