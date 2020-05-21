@@ -68,9 +68,12 @@
     <Compile Include="Assets\Scripts\PlayerParts\Attack\AttackCollider.cs" />
     <Compile Include="Assets\Scripts\PlayerParts\Attack\AttackProcess.cs" />
     <Compile Include="Assets\Scripts\PlayerParts\Attack\AttackRay.cs" />
+    <Compile Include="Assets\Scripts\PlayerParts\Attack\CardBuffProcess.cs" />
     <Compile Include="Assets\Scripts\PlayerParts\Damage\PlayerDamageProcess.cs" />
     <Compile Include="Assets\Scripts\PlayerParts\Damage\PlayerHP.cs" />
     <Compile Include="Assets\Scripts\PlayerParts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\UI_Card\CardBuff.cs" />
+    <Compile Include="Assets\Scripts\UI_Card\ThirdCard.cs" />
     <Compile Include="Assets\Scripts\UI_WaveText\WaveCountdown.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

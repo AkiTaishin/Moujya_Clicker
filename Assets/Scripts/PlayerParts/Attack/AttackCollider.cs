@@ -6,8 +6,6 @@ public class AttackCollider : MonoBehaviour
 {
     [SerializeField] private WaveCountdown wave = null;
 
-    // 攻撃力基礎値
-    private int AttackPower = 2;
 
     /// <summary>
     /// 攻撃との衝突判定
@@ -19,14 +17,11 @@ public class AttackCollider : MonoBehaviour
         //ターゲットにしたオブジェクトにタグをつけとく
         if (other.gameObject.tag == "enemy")
         {
-            // @todoここでダメージ判定処理
-
-            // コルーチン停止
-            // 物体どっちにしろ消えるしこれいらないのでは？
-            // chase.GetComponent<Chase>().SetbC_();
+            // 速度デバフ
+            other.transform.gameObject.GetComponent<EnemyStatusManager>().SetSpeed(GetComponent<CardBuffProcess>().RetSpeedDebuff());
 
             // 敵の体力の減少処理
-            other.transform.gameObject.GetComponent<EnemyStatusManager>().SetHP(AttackPower);
+            other.transform.gameObject.GetComponent<EnemyStatusManager>().SetHP(transform.parent.Find("player").GetComponent<AttackProcess>().AttackPower);
             Debug.Log(other.transform.gameObject.GetComponent<EnemyStatusManager>().GetHP());
 
             // 攻撃によってこの敵が破壊されたか？

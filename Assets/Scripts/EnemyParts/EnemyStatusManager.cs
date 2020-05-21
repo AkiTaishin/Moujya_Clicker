@@ -32,4 +32,9 @@ public class EnemyStatusManager : MonoBehaviour
     {
         return Speed;
     }
+
+    public void SetSpeed(float debuff)
+    {
+        Speed *= debuff;
+    }
 }

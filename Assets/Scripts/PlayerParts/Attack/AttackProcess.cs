@@ -11,16 +11,28 @@ public class AttackProcess : MonoBehaviour
     public AttackCollider attackCollider = null;
 
     // ぶっ飛ぶから子供にしてないよ
-    public GameObject coliider = null;
+    public GameObject colliderObject = null;
 
     // false = 弱
     private bool AttackPattern = false;
+
+    // 攻撃基礎値
+    public int AttackPower;
 
     // コルーチン二重稼働防止用
     // 攻撃発生まで動けない時のためにpublicにしておく@todo仕様確認
     public bool bAttackFrameIsBusy = false;
 
     #endregion 変数宣言
+
+
+    private void Start()
+    {
+        // 初期設定
+        AttackPattern = false;
+        bAttackFrameIsBusy = false;
+        AttackPower = 1;
+    }
 
     // Update is called once per frame
     private void Update()
@@ -76,36 +88,60 @@ public class AttackProcess : MonoBehaviour
     // 攻撃処理
     private void PlayerAttack()
     {
-        coliider = GameObject.Find("attackCollider");
+        colliderObject = GameObject.Find("attackCollider");
         if (AttackPattern)
         {
-            coliider.GetComponent<BoxCollider>().enabled = true;
-            coliider.GetComponent<MeshRenderer>().enabled = true;
-            coliider.GetComponent<Renderer>().material.color = Color.white;
+            AttackPower = 2;
+
+            // カードの効果発動
+            ApplyToCardBuff(colliderObject);
+
+            colliderObject.GetComponent<BoxCollider>().enabled = true;
+            colliderObject.GetComponent<MeshRenderer>().enabled = true;
+            colliderObject.GetComponent<Renderer>().material.color = Color.white;
         }
         else
         {
+            AttackPower = 1;
+
+            // カードの効果発動
+            ApplyToCardBuff(colliderObject);
+
             attackRay.AttackHitProcess();
-            coliider.GetComponent<MeshRenderer>().enabled = true;
-            coliider.GetComponent<Renderer>().material.color = Color.gray;
+            colliderObject.GetComponent<MeshRenderer>().enabled = true;
+            colliderObject.GetComponent<Renderer>().material.color = Color.gray;
         }
     }
 
     // 攻撃終了処理(当たり判定の削除)
     private void PlayerAttackFinish()
     {
-        coliider = GameObject.Find("attackCollider");
+        colliderObject = GameObject.Find("attackCollider");
         if (AttackPattern)
         {
-            coliider.GetComponent<BoxCollider>().enabled = false;
-            coliider.GetComponent<MeshRenderer>().enabled = false;
+            colliderObject.GetComponent<BoxCollider>().enabled = false;
+            colliderObject.GetComponent<MeshRenderer>().enabled = false;
         }
         else
         {
-            coliider.GetComponent<MeshRenderer>().enabled = false;
+            colliderObject.GetComponent<MeshRenderer>().enabled = false;
         }
 
         // フラグの初期化
         bAttackFrameIsBusy = false;
+
+        // バフの切り替え
+        colliderObject.GetComponent<CardBuffProcess>().NextBuff();
+    }
+
+
+    /// <summary>
+    /// カードの適用
+    /// </summary>
+    /// <param name="colliderObject"></param>
+    void ApplyToCardBuff(GameObject colliderObject)
+    {
+        colliderObject.GetComponent<CardBuffProcess>().BuffProcess();
+        AttackPower *= colliderObject.GetComponent<CardBuffProcess>().PowerBuff;
     }
 }

@@ -8,7 +8,7 @@ public class AttackRay : MonoBehaviour
     private Vector3 GetPlayerDir = Vector3.zero;
 
     // 攻撃力基礎値
-    private int AttackPower = 1;
+    //private int AttackPower = 1;
 
     // 攻撃による当たり判定
     // Collisionを使わずに貫通判定を無くすようにする
@@ -39,11 +39,13 @@ public class AttackRay : MonoBehaviour
             // 敵だった時
             if (hit.transform.tag == "enemy")
             {
-                Debug.Log("RayHit");
-                Debug.Log(hit.collider.gameObject.transform.position);
+                // 速度デバフ
+                hit.transform.gameObject.GetComponent<EnemyStatusManager>().SetSpeed(GameObject.Find("attackCollider").GetComponent<CardBuffProcess>().RetSpeedDebuff());
 
                 // 敵の体力の減少処理
-                hit.transform.gameObject.GetComponent<EnemyStatusManager>().SetHP(AttackPower);
+                hit.transform.gameObject.GetComponent<EnemyStatusManager>().SetHP(GetComponent<AttackProcess>().AttackPower);
+                //hit.transform.gameObject.GetComponent<EnemyStatusManager>().SetHP(transform.parent.Find("player").GetComponent<AttackProcess>().AttackPower);
+                Debug.Log(hit.transform.gameObject.GetComponent<EnemyStatusManager>().GetHP());
 
                 // 攻撃によってこの敵が破壊されたか？
                 if (hit.transform.gameObject.GetComponent<EnemyStatusManager>().GetHP() <= 0)

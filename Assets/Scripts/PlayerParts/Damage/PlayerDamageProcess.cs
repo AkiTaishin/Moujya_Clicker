@@ -40,8 +40,6 @@ public class PlayerDamageProcess : MonoBehaviour
             {
                 HitPoint = PlayerMaxHP;
             }
-
-            Debug.Log(HitPoint);
         }
     }
 }
