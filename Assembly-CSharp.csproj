@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\PlayerParts\Attack\AttackProcess.cs" />
     <Compile Include="Assets\Scripts\PlayerParts\Attack\AttackRay.cs" />
     <Compile Include="Assets\Scripts\PlayerParts\Attack\CardBuffProcess.cs" />
+    <Compile Include="Assets\Scripts\PlayerParts\Attack\CircleCollider.cs" />
     <Compile Include="Assets\Scripts\PlayerParts\Damage\PlayerDamageProcess.cs" />
     <Compile Include="Assets\Scripts\PlayerParts\Damage\PlayerHP.cs" />
     <Compile Include="Assets\Scripts\PlayerParts\PlayerController.cs" />

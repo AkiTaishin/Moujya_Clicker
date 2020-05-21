@@ -18,10 +18,10 @@ public class AttackCollider : MonoBehaviour
         if (other.gameObject.tag == "enemy")
         {
             // 速度デバフ
-            other.transform.gameObject.GetComponent<EnemyStatusManager>().SetSpeed(GetComponent<CardBuffProcess>().RetSpeedDebuff());
+            other.transform.gameObject.GetComponent<EnemyStatusManager>().SetSpeed(GameObject.Find("attackCollider").GetComponent<CardBuffProcess>().RetSpeedDebuff());
 
             // 敵の体力の減少処理
-            other.transform.gameObject.GetComponent<EnemyStatusManager>().SetHP(transform.parent.Find("player").GetComponent<AttackProcess>().AttackPower);
+            other.transform.gameObject.GetComponent<EnemyStatusManager>().SetHP(GameObject.Find("player").GetComponent<AttackProcess>().AttackPower);
             Debug.Log(other.transform.gameObject.GetComponent<EnemyStatusManager>().GetHP());
 
             // 攻撃によってこの敵が破壊されたか？

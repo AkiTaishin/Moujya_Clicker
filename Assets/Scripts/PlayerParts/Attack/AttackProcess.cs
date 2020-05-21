@@ -9,12 +9,16 @@ public class AttackProcess : MonoBehaviour
 
     public AttackRay attackRay = null;
     public AttackCollider attackCollider = null;
+    public GameObject circleCollider = null;
 
     // ぶっ飛ぶから子供にしてないよ
     public GameObject colliderObject = null;
 
     // false = 弱
     private bool AttackPattern = false;
+
+    // false = 通常, true = カードバフ有
+    private bool AttackCollision = false;
 
     // 攻撃基礎値
     public int AttackPower;
@@ -25,11 +29,11 @@ public class AttackProcess : MonoBehaviour
 
     #endregion 変数宣言
 
-
     private void Start()
     {
         // 初期設定
         AttackPattern = false;
+        AttackCollision = false;
         bAttackFrameIsBusy = false;
         AttackPower = 1;
     }
@@ -89,27 +93,45 @@ public class AttackProcess : MonoBehaviour
     private void PlayerAttack()
     {
         colliderObject = GameObject.Find("attackCollider");
-        if (AttackPattern)
+
+        // 円形範囲攻撃
+        if (colliderObject.GetComponent<CardBuffProcess>().AttackBuffType == 2)
         {
-            AttackPower = 2;
-
-            // カードの効果発動
-            ApplyToCardBuff(colliderObject);
-
-            colliderObject.GetComponent<BoxCollider>().enabled = true;
-            colliderObject.GetComponent<MeshRenderer>().enabled = true;
-            colliderObject.GetComponent<Renderer>().material.color = Color.white;
+            if (AttackPattern)
+            {
+                AttackPower = 2;
+            }
+            else
+            {
+                AttackPower = 1;
+            }
+            circleCollider.GetComponent<SphereCollider>().enabled = true;
+            circleCollider.GetComponent<MeshRenderer>().enabled = true;
         }
         else
         {
-            AttackPower = 1;
+            if (AttackPattern)
+            {
+                AttackPower = 2;
 
-            // カードの効果発動
-            ApplyToCardBuff(colliderObject);
+                // カードの効果発動
+                ApplyToCardBuff(colliderObject);
 
-            attackRay.AttackHitProcess();
-            colliderObject.GetComponent<MeshRenderer>().enabled = true;
-            colliderObject.GetComponent<Renderer>().material.color = Color.gray;
+                colliderObject.GetComponent<BoxCollider>().enabled = true;
+                colliderObject.GetComponent<MeshRenderer>().enabled = true;
+                colliderObject.GetComponent<Renderer>().material.color = Color.white;
+            }
+            else
+            {
+                AttackPower = 1;
+
+                // カードの効果発動
+                ApplyToCardBuff(colliderObject);
+
+                attackRay.AttackHitProcess();
+                colliderObject.GetComponent<MeshRenderer>().enabled = true;
+                colliderObject.GetComponent<Renderer>().material.color = Color.gray;
+            }
         }
     }
 
@@ -117,14 +139,24 @@ public class AttackProcess : MonoBehaviour
     private void PlayerAttackFinish()
     {
         colliderObject = GameObject.Find("attackCollider");
-        if (AttackPattern)
+
+        // 円形範囲攻撃
+        if (colliderObject.GetComponent<CardBuffProcess>().AttackBuffType == 2)
         {
-            colliderObject.GetComponent<BoxCollider>().enabled = false;
-            colliderObject.GetComponent<MeshRenderer>().enabled = false;
+            circleCollider.GetComponent<SphereCollider>().enabled = false;
+            circleCollider.GetComponent<MeshRenderer>().enabled = false;
         }
         else
         {
-            colliderObject.GetComponent<MeshRenderer>().enabled = false;
+            if (AttackPattern)
+            {
+                colliderObject.GetComponent<BoxCollider>().enabled = false;
+                colliderObject.GetComponent<MeshRenderer>().enabled = false;
+            }
+            else
+            {
+                colliderObject.GetComponent<MeshRenderer>().enabled = false;
+            }
         }
 
         // フラグの初期化
@@ -134,12 +166,11 @@ public class AttackProcess : MonoBehaviour
         colliderObject.GetComponent<CardBuffProcess>().NextBuff();
     }
 
-
     /// <summary>
     /// カードの適用
     /// </summary>
     /// <param name="colliderObject"></param>
-    void ApplyToCardBuff(GameObject colliderObject)
+    private void ApplyToCardBuff(GameObject colliderObject)
     {
         colliderObject.GetComponent<CardBuffProcess>().BuffProcess();
         AttackPower *= colliderObject.GetComponent<CardBuffProcess>().PowerBuff;

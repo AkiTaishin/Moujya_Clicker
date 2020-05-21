@@ -9,6 +9,7 @@ public class CardBuffProcess : MonoBehaviour
 
     // Caseに使用。バフはなにか確認。
     public int AttackBuffType;
+
     public int PowerBuff;
     public float SpeedDebuff;
 

@@ -34,6 +34,7 @@ public class PlayerDamageProcess : MonoBehaviour
             // @todoここでダメージ判定処理
             // ぶつかった敵の種類に応じた体力減算処理
             HitPoint -= other.gameObject.GetComponent<EnemyStatusManager>().GetPower();
+            Debug.Log("いたい");
 
             // Debug用
             if(HitPoint <= 0)
